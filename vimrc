@@ -12,6 +12,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/emmet-vim'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
