@@ -14,6 +14,7 @@ Bundle 'mattn/emmet-vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -75,4 +76,4 @@ nnoremap <leader>p :bp<CR>
 vmap < <gv
 vmap > >gv
 
-
+set laststatus=2
