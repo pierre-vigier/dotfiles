@@ -77,3 +77,8 @@ vmap < <gv
 vmap > >gv
 
 set laststatus=2
+
+" remember last position in files
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
