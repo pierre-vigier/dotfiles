@@ -14,6 +14,7 @@ Bundle 'mattn/emmet-vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " All of your Plugins must be added before the following line
@@ -53,6 +54,9 @@ autocmd VimResized * :wincmd =
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
+"with multicursor, escape from normal mode does not exit multicursor
+let g:multi_cursor_exit_from_insert_mode = 0
+
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
   let _s=@/
@@ -81,4 +85,6 @@ set laststatus=2
 " remember last position in files
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 endif
+
