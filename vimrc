@@ -16,6 +16,10 @@ Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'airblade/vim-gitgutter'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-perl/vim-perl'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
