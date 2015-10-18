@@ -20,6 +20,8 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-perl/vim-perl'
+Bundle 'majutsushi/tagbar'
+Bundle 'nikvdp/ejs-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -81,6 +83,8 @@ nnoremap <leader>v :set paste!<CR>"*p<CR>:set paste!<CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 
+nnoremap <leader>b :TagbarToggle<CR>
+
 vmap < <gv
 vmap > >gv
 
@@ -92,3 +96,11 @@ if has("autocmd")
     autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 endif
 
+" macvim section
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Inconsolata\ for\ Powerline:h15
+   endif
+   colorscheme pablo
+endif
