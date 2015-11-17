@@ -50,7 +50,7 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git docker)
 
 # User configuration
 
@@ -118,3 +118,22 @@ function prompt_perl {
 }
 export PS1="\$(prompt_perl)$PS1"
 eval "$(/Users/pierre/.rakudobrew/bin/rakudobrew init -)"
+
+#docker machine helper
+my_docker_machine="default"
+function dockon {
+    don=`docker-machine status $my_docker_machine`
+    if [ $don != "Running" ] ; then
+        echo "docker-machine $my_docker_machine is not running, turn it on"
+        docker-machine start $my_docker_machine
+        echo "docker-machine $my_docker_machine is up"
+    else
+        echo "docker-machine $my_docker_machine is up"
+    fi
+    #export env
+    eval "$(docker-machine env $my_docker_machine)"
+    docker-machine ip $my_docker_machine
+}
+function dockip {
+    docker-machine ip $my_docker_machine
+}
