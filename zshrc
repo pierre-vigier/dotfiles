@@ -83,6 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PERL6_TEST_META=1
 export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
 eval "$(plenv init -)"
@@ -92,6 +93,7 @@ eval "$(pyenv virtualenv-init -)"
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.3.3/
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/sbin:$PATH"
+export PATH=~/.rakudobrew/bin:$PATH
 
 function perl_v {
     if type plenv &>/dev/null; then
