@@ -93,7 +93,8 @@ set laststatus=2
 " remember last position in files
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-    autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+    autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+    autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 endif
 
 " macvim section
