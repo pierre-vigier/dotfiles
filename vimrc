@@ -11,17 +11,18 @@ Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/emmet-vim'
-Bundle 'christoomey/vim-tmux-navigator'
+"Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'airblade/vim-gitgutter'
-Bundle 'sjl/gundo.vim'
+"Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'vim-perl/vim-perl'
+"Bundle 'vim-perl/vim-perl'
 Bundle 'majutsushi/tagbar'
-Bundle 'nikvdp/ejs-syntax'
+"Bundle 'nikvdp/ejs-syntax'
+Bundle 'godlygeek/tabular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +41,9 @@ set autoindent
 set softtabstop=4
 "backspace everything
 set bs=2
+set hlsearch
+" to see non breaking spaces as well
+set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
 
 au FilterWritePre * if &diff | colorscheme leo | endif
 
