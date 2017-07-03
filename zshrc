@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/pierre/.oh-my-zsh
+export ZSH=/Users/pierre.vigier/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,7 +50,7 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker)
+plugins=(git docker pass)
 
 # User configuration
 
@@ -88,10 +88,10 @@ export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
 eval "$(plenv init -)"
 eval "$(rbenv init -)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.3.3/
-export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+#export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.3.3/
+#export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/sbin:$PATH"
 export PATH=~/.rakudobrew/bin:$PATH
 
@@ -119,7 +119,7 @@ function prompt_perl {
     fi
 }
 export PS1="\$(prompt_perl)$PS1"
-eval "$(/Users/pierre/.rakudobrew/bin/rakudobrew init -)"
+eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
 
 #docker machine helper
 my_docker_machine="default"
@@ -139,3 +139,13 @@ function dockon {
 function dockip {
     docker-machine ip $my_docker_machine
 }
+
+#export PATH="$(brew --prefix homebrew/php/php70)/bin:$HOME/.composer:$PATH"
+export PATH="$HOME/.composer:$PATH"
+export EDITOR='vim'
+
+alias vim=nvim
+alias cperl="carton exec -- perl"
+alias cprove="carton exec -- prove"
+
+export GOPATH=$HOME/go-work
