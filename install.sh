@@ -17,3 +17,7 @@ echo "Symlink zshrc file"
 echo ln -s $CURRENT_PATH/zshrc $HOME/.zshrc
 
 ln -s $CURRENT_PATH/zshrc $HOME/.zshrc
+
+echo ln -s $CURRENT_PATH/psqlrc $HOME/.psqlrc
+
+ln -s $CURRENT_PATH/psqlrc $HOME/.psqlrc
