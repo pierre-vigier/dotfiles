@@ -1,34 +1,63 @@
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/nerdtree'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'mattn/emmet-vim'
-"Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdcommenter'
-"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'airblade/vim-gitgutter'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-"Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-fugitive'
-"Bundle 'vim-perl/vim-perl'
-Bundle 'majutsushi/tagbar'
-"Bundle 'nikvdp/ejs-syntax'
-Bundle 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mattn/emmet-vim'
+"Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-scripts/matchit.zip'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-fugitive'
+"Plug 'vim-perl/vim-perl'
+Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
+"Plug 'c9s/perlomni.vim'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'w0rp/ale'
+Plug 'posva/vim-vue'
+"
+" Add plugins to &runtimepath
+call plug#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:ctrlp_follow_symlinks = 1
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+let g:go_fmt_fail_silently = 1
+" let g:deoplete#disable_auto_complete = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" deoplete tab-complete
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 colorscheme pablo
 syntax on
@@ -45,13 +74,8 @@ set softtabstop=4
 set bs=2
 set hlsearch
 " to see non breaking spaces as well
-" set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
-
-" let g:airline_powerline_fonts = 1
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_symbols.space = "\ua0"
+set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+set mouse=
 
 au FilterWritePre * if &diff | colorscheme leo | endif
 
@@ -65,6 +89,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 au BufRead,BufNewFile *.tt setfiletype tt2html
+au BufRead,BufNewFile *.tt2 setfiletype tt2html
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -90,6 +115,7 @@ nnoremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>j ddp
 nnoremap <leader>k ddkP
+vnoremap <leader>c "*y<CR>
 nnoremap <leader>v :set paste!<CR>"*p<CR>:set paste!<CR>
 
 nnoremap <leader>n :bn<CR>
@@ -99,6 +125,10 @@ nnoremap <leader>b :TagbarToggle<CR>
 
 vmap < <gv
 vmap > >gv
+
+let g:NERDCreateDefaultMappings = 0
+nnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
+vnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
 
 set laststatus=2
 
@@ -117,3 +147,7 @@ if has("gui_running")
    endif
    colorscheme pablo
 endif
+
+" perl linting
+let g:ale_perl_perl_options =
+\   get(g:, 'ale_perl_perl_options', '-Ilib -Ilocal/lib/perl5 -Mwarnings -Mstrict -c')
