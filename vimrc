@@ -15,8 +15,10 @@ Bundle 'mattn/emmet-vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'airblade/vim-gitgutter'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 "Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 "Bundle 'vim-perl/vim-perl'
@@ -44,6 +46,12 @@ set bs=2
 set hlsearch
 " to see non breaking spaces as well
 set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 
 au FilterWritePre * if &diff | colorscheme leo | endif
 

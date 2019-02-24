@@ -50,7 +50,8 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker pass)
+#plugins=(git docker cpanm git-extras perl zsh-autosuggestions zsh-syntax-highlighting )
+plugins=(git docker cpanm git-extras perl fast-syntax-highlighting pyenv virtualenv history-substring-search)
 
 # User configuration
 
@@ -87,13 +88,16 @@ export PERL6_TEST_META=1
 export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
 eval "$(plenv init -)"
-eval "$(rbenv init -)"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
+#eval "$(rbenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 #export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.3.3/
 #export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/sbin:$PATH"
 export PATH=~/.rakudobrew/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 function perl_v {
     if type plenv &>/dev/null; then
@@ -121,26 +125,6 @@ function prompt_perl {
 export PS1="\$(prompt_perl)$PS1"
 eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
 
-#docker machine helper
-my_docker_machine="default"
-function dockon {
-    don=`docker-machine status $my_docker_machine`
-    if [ $don != "Running" ] ; then
-        echo "docker-machine $my_docker_machine is not running, turn it on"
-        docker-machine start $my_docker_machine
-        echo "docker-machine $my_docker_machine is up"
-    else
-        echo "docker-machine $my_docker_machine is up"
-    fi
-    #export env
-    eval "$(docker-machine env $my_docker_machine)"
-    docker-machine ip $my_docker_machine
-}
-function dockip {
-    docker-machine ip $my_docker_machine
-}
-
-#export PATH="$(brew --prefix homebrew/php/php70)/bin:$HOME/.composer:$PATH"
 export PATH="$HOME/.composer:$PATH"
 export EDITOR='vim'
 
@@ -148,4 +132,14 @@ alias vim=nvim
 alias cperl="carton exec -- perl"
 alias cprove="carton exec -- prove"
 
+alias startcobra="~/.ascript/cobra.sh"
+alias startviper="~/.ascript/viper.sh"
+
 export GOPATH=$HOME/go-work
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
