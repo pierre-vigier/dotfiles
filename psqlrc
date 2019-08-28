@@ -22,4 +22,10 @@
 
 \set activity 'select datname, pid, usename, application_name,client_addr, client_hostname, client_port, query, state from pg_stat_activity;'
 
-\set waits 'SELECT pg_stat_activity.pid, pg_stat_activity.query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
+\set long_running 'SELECT usename, pid, substr(query,0,200), now() - query_start AS "totaltime", query_start, backend_start, state FROM pg_stat_activity WHERE state !~ ''idle'' and pg_stat_activity.query_start < now() - interval ''1 seconds'';'
+
+\set check_table_size 'SELECT nspname || ''.'' || relname AS "relation", pg_size_pretty(pg_total_relation_size(C.oid)) AS "total_size", pg_size_pretty(pg_table_size(C.oid)) AS "table_size", pg_size_pretty(pg_indexes_size(C.oid)) AS "index_size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (''pg_catalog'', ''information_schema'') AND C.relkind <> ''i'' AND nspname !~ ''^pg_toast'' ORDER BY pg_total_relation_size(C.oid) DESC LIMIT 30;'
+
+\set check_index_size 'SELECT nspname || ''.'' || relname AS "relation", pg_size_pretty(pg_total_relation_size(C.oid)) AS "total_size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (''pg_catalog'', ''information_schema'') AND C.relkind = ''i'' AND nspname !~ ''^pg_toast'' ORDER BY pg_total_relation_size(C.oid) DESC LIMIT 29;'
+
+\set check_db_size 'SELECT datname, pg_size_pretty(pg_database_size(datname)) db_size FROM pg_database ORDER BY db_size DESC LIMIT 10;'

@@ -51,7 +51,7 @@ ZSH_THEME="tonotdo"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git docker cpanm git-extras perl zsh-autosuggestions zsh-syntax-highlighting )
-plugins=(git docker cpanm git-extras perl fast-syntax-highlighting pyenv virtualenv history-substring-search)
+plugins=(git docker git-extras perl fast-syntax-highlighting pyenv virtualenv kubectl aws)
 
 # User configuration
 
@@ -123,10 +123,10 @@ function prompt_perl {
     fi
 }
 export PS1="\$(prompt_perl)$PS1"
-eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
+#eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
 
 export PATH="$HOME/.composer:$PATH"
-export EDITOR='vim'
+export EDITOR='nvim'
 
 alias vim=nvim
 alias cperl="carton exec -- perl"
@@ -136,10 +136,21 @@ alias startcobra="~/.ascript/cobra.sh"
 alias startviper="~/.ascript/viper.sh"
 
 export GOPATH=$HOME/go-work
+export PATH=$GOPATH/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

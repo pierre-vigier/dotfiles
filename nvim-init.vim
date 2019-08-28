@@ -16,6 +16,8 @@ Plug 'fatih/vim-go'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+Plug 'posva/vim-vue'
+Plug 'chrisbra/csv.vim'
 "Plug 'w0rp/ale'
 "Plug 'leafOfTree/vim-vue-plugin'
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
