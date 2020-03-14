@@ -2,15 +2,25 @@
 
 CURRENT_PATH=`pwd`
 
-echo "Symlink vimrc file"
+#echo "Symlink vimrc file"
+#
+#echo ln -s $CURRENT_PATH/vimrc $HOME/.vimrc
+#
+#ln -s $CURRENT_PATH/vimrc $HOME/.vimrc
+#
+#git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+#
+#vim +PluginInstall +qall
 
-echo ln -s $CURRENT_PATH/vimrc $HOME/.vimrc
+echo "Neovim conf"
 
-ln -s $CURRENT_PATH/vimrc $HOME/.vimrc
+echo "mkdir -p $HOME/.config/nvim"
 
-git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+mkdir -p $HOME/.config/nvim
 
-vim +PluginInstall +qall
+echo ln -s $CURRENT_PATH/nvim-init.vim $HOME/.config/nvim/init.vim
+
+ln -s $CURRENT_PATH/nvim-init.vim $HOME/.config/nvim/init.vim
 
 echo "Symlink zshrc file"
 
