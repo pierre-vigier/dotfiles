@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/pierre.vigier/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,7 +55,7 @@ plugins=(git docker git-extras perl fast-syntax-highlighting pyenv virtualenv ku
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -87,12 +87,13 @@ source $ZSH/oh-my-zsh.sh
 export PERL6_TEST_META=1
 export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
+export PATH="$HOME/.plenv/bin:$PATH"
 eval "$(plenv init -)"
 #eval "$(rbenv init -)"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 #export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.3.3/
 #export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/sbin:$PATH"
@@ -123,7 +124,7 @@ function prompt_perl {
     fi
 }
 export PS1="\$(prompt_perl)$PS1"
-#eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
+#eval "$($HOME/.rakudobrew/bin/rakudobrew init -)"
 
 export PATH="$HOME/.composer:$PATH"
 export EDITOR='nvim'
@@ -137,6 +138,7 @@ alias startviper="~/.ascript/viper.sh"
 
 export GOPATH=$HOME/go-work
 export PATH=$GOPATH/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -154,3 +156,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
