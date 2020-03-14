@@ -67,6 +67,8 @@ if has('nvim')
     let g:python3_host_prog = '/usr/local/bin/python3'
     "let g:node_host_prog = '/usr/local/bin/node'
     "let g:coc_node_path = '/usr/local/bin/node'
+    let g:node_host_prog = '/bin/node'
+    let g:coc_node_path = '/bin/node'
 endif
 
 " Convenient move across windows
