@@ -9,18 +9,42 @@ Plug 'kaicataldo/material.vim'
     "\ 'branch': 'next',
     "\ 'do': 'bash install.sh',
     "\ }
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'zchee/deoplete-jedi'
 "Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'posva/vim-vue'
-Plug 'chrisbra/csv.vim'
-"Plug 'w0rp/ale'
-"Plug 'leafOfTree/vim-vue-plugin'
+"Plug 'chrisbra/csv.vim'
+Plug 'w0rp/ale'
+Plug 'leafOfTree/vim-vue-plugin'
+Plug 'davidhalter/jedi-vim'
+"Plug 'Shougo/neocomplcache.vim'
+Plug 'fisadev/vim-isort'
+Plug 'vim-scripts/dbext.vim'
+" Python and other languages code checker
+"Plug 'scrooloose/syntastic'
+if has('python')
+    " YAPF formatter for Python
+    Plug 'pignacio/vim-yapf-format'
+endif
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+"Plug 'vim-scripts/indentpython.vim'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'nvie/vim-flake8'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'roxma/nvim-yarp'
+"Plug 'ncm2/ncm2'
+" Fast python completion (use ncm2 if you want type info or snippet support)
+"Plug 'HansPinckaers/ncm2-jedi'
+" Words in buffer completion
+"Plug 'ncm2/ncm2-bufword'
+" Filepath completion
+"Plug 'ncm2/ncm2-path'
 "
 " Add plugins to &runtimepath
 call plug#end()
@@ -41,8 +65,8 @@ if has('nvim')
     " pip3.6 install -U neovim
     let g:python_host_prog = '/usr/local/bin/python2'
     let g:python3_host_prog = '/usr/local/bin/python3'
-    let g:node_host_prog = '/usr/local/bin/node'
-    let g:coc_node_path = '/usr/local/bin/node'
+    "let g:node_host_prog = '/usr/local/bin/node'
+    "let g:coc_node_path = '/usr/local/bin/node'
 endif
 
 " Convenient move across windows
@@ -170,55 +194,55 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+"" Use <c-space> to trigger completion.
+""inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+"" Use `[c` and `]c` to navigate diagnostics
+""nmap <silent> [c <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"" Remap keys for gotos
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
+"" Use U to show documentation in preview window
+"nnoremap <silent> U :call <SID>show_documentation()<CR>
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+"" Remap for rename current word
+"nmap <leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"" Remap for format selected region
+"vmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
+"" Show all diagnostics
+"nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"" Manage extensions
+"nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+"" Show commands
+"nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+"" Find symbol of current document
+"nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+"" Search workspace symbols
+"nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+"" Do default action for next item.
+"nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+"" Do default action for previous item.
+"nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+"" Resume latest coc list
+"nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
@@ -239,3 +263,64 @@ autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2 expandtab
 " perl linting
 let g:ale_perl_perl_options =
 \   get(g:, 'ale_perl_perl_options', '-Ilib -Ilocal/lib/perl5 -Mwarnings -Mstrict -c')
+
+" Comment this line to enable autocompletion preview window
+" (displays documentation related to the selected completion option)
+" Disabled by default because preview makes the window flicker
+set completeopt-=preview
+
+" when scrolling, keep cursor 3 lines away from screen border
+set scrolloff=3
+
+" Syntastic ------------------------------
+
+" show list of errors and warnings on the current file
+"nmap <leader>e :Errors<CR>
+" check also when just opened the file
+"let g:syntastic_check_on_open = 1
+" don't put icons on the sign column (it hides the vcs status icons of signify)
+"let g:syntastic_enable_signs = 0
+"let g:syntastic_enable_perl_checker = 0
+" custom icons (enable them if you use a patched font, and enable the previous 
+" setting)
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_warning_symbol = '⚠'
+"let g:syntastic_style_error_symbol = '✗'
+"let g:syntastic_style_warning_symbol = '⚠'
+
+" Jedi-vim ------------------------------
+
+" All these mappings work only for python code:
+" Go to definition
+let g:jedi#goto_command = ',d'
+" Find ocurrences
+let g:jedi#usages_command = ',o'
+" Find assignments
+let g:jedi#goto_assignments_command = ',a'
+" Go to definition in new tab
+nmap ,D :tab split<CR>:call jedi#goto()<CR>
+
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+" NeoComplCache ------------------------------
+
+" most of them not documented because I'm not sure how they work
+" (docs aren't good, had to do a lot of trial and error to make 
+" it play nice)
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_ignore_case = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_enable_fuzzy_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_fuzzy_completion_start_length = 3
+"let g:neocomplcache_auto_completion_start_length = 3
+"let g:neocomplcache_manual_completion_start_length = 3
+"let g:neocomplcache_min_keyword_length = 3
+"let g:neocomplcache_min_syntax_length = 3
+"" complete with workds from any opened file
+"let g:neocomplcache_same_filetype_lists = {}
+"let g:neocomplcache_same_filetype_lists._ = '_'

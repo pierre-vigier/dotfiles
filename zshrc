@@ -51,7 +51,7 @@ ZSH_THEME="tonotdo"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git docker cpanm git-extras perl zsh-autosuggestions zsh-syntax-highlighting )
-plugins=(git docker git-extras perl fast-syntax-highlighting pyenv virtualenv kubectl aws)
+plugins=(git docker git-extras perl fast-syntax-highlighting pyenv virtualenv kubectl aws ansible)
 
 # User configuration
 
@@ -122,7 +122,17 @@ function prompt_perl {
         perl_v;
     fi
 }
-export PS1="\$(prompt_perl)$PS1"
+function check_last_exit_code() {
+	local LAST_EXIT_CODE=$?
+	if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+		local EXIT_CODE_PROMPT=' '
+		EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+		EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+		EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+		echo "$EXIT_CODE_PROMPT"
+	fi
+}
+export PS1="\$(check_last_exit_code)\$(prompt_perl)$PS1"
 #eval "$(/Users/pierre.vigier/.rakudobrew/bin/rakudobrew init -)"
 
 export PATH="$HOME/.composer:$PATH"
